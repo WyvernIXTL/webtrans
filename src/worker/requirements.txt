@@ -1,0 +1,9 @@
+torch
+torchvision
+torchaudio
+numpy
+clang
+submitit
+six
+sacrebleu == 1.2.11
+Cython
