@@ -8,6 +8,10 @@ FROM rockylinux:9
 
 RUN dnf update -y
 
+# Downloading models.
+WORKDIR /opt/models
+RUN curl -s -O https://dl.fbaipublicfiles.com/transcoder/model_1.pth https://dl.fbaipublicfiles.com/transcoder/model_2.pth
+
 # Install Python.
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -15,9 +19,10 @@ ENV PYTHONUNBUFFERED=1
 RUN dnf install python3-devel -y
 RUN python3 -m ensurepip
 
-# Install GCC.
-RUN dnf install gcc -y
-RUN dnf install gcc-c++ -y
+# Install Clang.
+RUN dnf install clang -y
+RUN dnf install clang-devel -y
+RUN dnf install python3-clang -y
 
 # Install Python dependencies.
 COPY requirements.txt .
@@ -35,13 +40,13 @@ RUN git clone https://github.com/facebookresearch/TransCoder.git
 WORKDIR "/optTransCoder/XLM/tools"
 RUN git clone https://github.com/glample/fastBPE
 WORKDIR "/optTransCoder/XLM/tools/fastBPE"
-RUN g++ -std=c++11 -pthread -O3 fastBPE/main.cc -IfastBPE -o fast
+RUN clang++ -std=c++11 -pthread -O3 fastBPE/main.cc -IfastBPE -o fast
 RUN python3 setup.py install
 
 # Install Apex.
-WORKDIR "/opt"
-RUN git clone https://github.com/NVIDIA/apex
-WORKDIR "/opt/apex"
-RUN pip3 install -r requirements.txt
+#WORKDIR "/opt"
+#RUN git clone https://github.com/NVIDIA/apex
+#WORKDIR "/opt/apex"
+#RUN pip3 install -r requirements.txt
 #RUN pip3 install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
-RUN pip3 install -v --disable-pip-version-check --no-cache-dir ./
+#RUN pip3 install -v --disable-pip-version-check --no-cache-dir ./
