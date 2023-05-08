@@ -4,7 +4,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-FROM rockylinux:9
+FROM fedora:latest
 
 RUN dnf update -y
 
