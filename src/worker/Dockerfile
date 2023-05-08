@@ -24,6 +24,10 @@ RUN dnf install clang -y
 RUN dnf install clang-devel -y
 RUN dnf install python3-clang -y
 
+# Install GCC (fastBPE dependeny).
+RUN dnf install gcc -y
+RUN dnf install gcc-c++ -y
+
 # Install Python dependencies.
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
@@ -35,13 +39,22 @@ RUN dnf install git -y
 WORKDIR "/opt"
 RUN git clone https://github.com/facebookresearch/TransCoder.git
 
-
 # Install fastBPE.
 WORKDIR "/optTransCoder/XLM/tools"
 RUN git clone https://github.com/glample/fastBPE
 WORKDIR "/optTransCoder/XLM/tools/fastBPE"
-RUN clang++ -std=c++11 -pthread -O3 fastBPE/main.cc -IfastBPE -o fast
+RUN g++ -std=c++11 -pthread -O3 fastBPE/main.cc -IfastBPE -o fast
 RUN python3 setup.py install
+
+# Change libclang.so path of /opt/TransCoder/preprocessing/src/code_tokenizer.py
+WORKDIR /
+RUN sed -i "s|clang.cindex.Config.set_library_path('/usr/lib/llvm-7/lib/')|clang.cindex.Config.set_library_path('/usr/lib64')|g" /opt/TransCoder/preprocessing/src/code_tokenizer.py
+RUN echo "Modified file preprocessing/src/code_tokenizer.py changing /usr/lib/llvm-7/lib/ to /usr/lib64 \n this modification is under the same license as this library" >> /opt/TransCoder/MODIFICATIONS.txt
+
+# !!!!!!!!!! this might be a problem
+RUN ln -s /usr/lib64/libclang.so.16 /usr/lib64/libclang-16.so
+
+
 
 # Install Apex.
 #WORKDIR "/opt"
