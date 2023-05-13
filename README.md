@@ -14,7 +14,7 @@ docker build -t wt_worker_debug .
 ```
 Running with cuda enabled gpu:
 ```bash
-docker run -it --gpus <gpuid> wt_worker_debug
+docker run -it --rm --gpus <gpuid> wt_worker_debug
 ```
 Running TransCoder:
 ```bash

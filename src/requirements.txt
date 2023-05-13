@@ -2,7 +2,7 @@ torch
 torchvision
 torchaudio
 numpy
-clang
+clang == 14
 submitit
 six
 sacrebleu == 1.2.11
