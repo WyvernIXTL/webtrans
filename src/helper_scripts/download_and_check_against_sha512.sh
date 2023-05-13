@@ -5,4 +5,4 @@
 
 curl -s -O $1
 echo "$2 $(basename $1)" | sha512sum --check --status
-return $?
+exit $?
