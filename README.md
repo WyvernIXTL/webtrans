@@ -9,7 +9,7 @@ Important!: Image size > 7 GB.
 
 ```bash
 git clone https://github.com/WyvernIXTL/webtrans.git
-cd ./webtrans/src/worker
+cd ./webtrans/src
 docker build -t wt_worker_debug .
 ```
 Running with cuda enabled gpu:
