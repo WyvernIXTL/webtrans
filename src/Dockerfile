@@ -6,16 +6,26 @@
 
 # syntax=docker/dockerfile:1
 
-# === Pyinstaller Webtrans
+# === Download Models and other files
 
-FROM rockylinux:9 AS buildtranscoder
+FROM rockylinux:9 AS downloader
+
+# Copy of helper scripts.
+WORKDIR /opt/helper_scripts
+COPY ./helper_scripts/download_and_check_against_sha512.sh ./
+
+# Downloading models.
+WORKDIR /opt/models
+RUN /opt/helper_scripts/download_and_check_against_sha512.sh https://dl.fbaipublicfiles.com/transcoder/model_1.pth 1be95d2f4b81b90811f3342e36f231fe75f74f52aed5282dca48bac17f93b8172eebc86af1a95d91fc6a05806535e8a8df6ebdc17bbf229f01fc77aec27358b9
+RUN /opt/helper_scripts/download_and_check_against_sha512.sh https://dl.fbaipublicfiles.com/transcoder/model_2.pth a5b375fcc6cd919b292f0618ce206226e7408b066466fc30cc3f4430e79650e647c64f0883516eb246309a5c1afadeb48927b38778040c10c32186ed99c01566
+
+
+# === Base Image with Build Tools
+
+FROM rockylinux:9 as builderbase
 
 # Enable EPEL
 RUN dnf install epel-release -y
-
-# Copy of helper scripts.
-WORKDIR /opt
-ADD ./helper_scripts ./helper_scripts
 
 # Install Python.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -32,8 +42,14 @@ RUN dnf install python3-clang -y
 # Install git.
 RUN dnf install git -y
 
-# Install upx
-RUN dnf install upx -y
+
+# === Builder Base Image with Helper Scripts, requirements.txt and Symlinks
+
+FROM builderbase AS builderbaseh
+
+# Copy of helper scripts.
+WORKDIR /opt
+ADD ./helper_scripts ./helper_scripts
 
 # COPY requirements.txt
 WORKDIR /opt
@@ -43,10 +59,26 @@ COPY requirements.txt .
 WORKDIR /opt/helper_scripts/
 RUN ./create_symlinks_and_update_requirements_libclang.sh
 
+
+# === Python Dependency Install in VENV
+
+FROM builderbaseh AS pythonbase
+
 # Install Python dependencies.
 WORKDIR /opt
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 RUN pip3 install -r requirements.txt
 RUN pip3 install fastBPE==0.1.0
+
+
+# === Webtrans ENV
+
+FROM builderbaseh AS transcoderenv
+
+# Fetch Python Venv
+COPY --from=pythonbase /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Download facebookresearch Transcoder
 WORKDIR /opt
@@ -57,33 +89,10 @@ WORKDIR /
 RUN sed -i "s|clang.cindex.Config.set_library_path('/usr/lib/llvm-7/lib/')|clang.cindex.Config.set_library_path('/usr/lib64')|g" /opt/TransCoder/preprocessing/src/code_tokenizer.py
 RUN echo "Modified file preprocessing/src/code_tokenizer.py changing /usr/lib/llvm-7/lib/ to /usr/lib64 \n this modification is under the same license as this library" >> /opt/TransCoder/MODIFICATIONS.txt
 
-# Run Pyinstaller for packaging WebTrans
-WORKDIR /opt/TransCoder
-RUN python3 -m pip uninstall typing -y
-RUN pyinstaller -D -y -n transcoder --copy-metadata torch --noupx ./translate.py
 
+# === Deployment
 
-# === Download Models and other files
+FROM transcoderenv as deployment
 
-FROM rockylinux:9 AS downloader
+COPY --from=downloader /opt/models /opt/models
 
-# Copy of helper scripts.
-WORKDIR /opt
-ADD ./helper_scripts ./helper_scripts
-
-# Downloading models.
-WORKDIR /opt/models
-RUN /opt/helper_scripts/download_and_check_against_sha512.sh https://dl.fbaipublicfiles.com/transcoder/model_1.pth 1be95d2f4b81b90811f3342e36f231fe75f74f52aed5282dca48bac17f93b8172eebc86af1a95d91fc6a05806535e8a8df6ebdc17bbf229f01fc77aec27358b9
-RUN /opt/helper_scripts/download_and_check_against_sha512.sh https://dl.fbaipublicfiles.com/transcoder/model_2.pth a5b375fcc6cd919b292f0618ce206226e7408b066466fc30cc3f4430e79650e647c64f0883516eb246309a5c1afadeb48927b38778040c10c32186ed99c01566
-
-
-# === Image for deployment
-
-FROM rockylinux:9 AS deploy
-
-# Copy TransCoder
-COPY --from=buildtranscoder /opt/TransCoder/dist/transcoder /opt/transcoder
-
-# Copy Models
-WORKDIR /opt/models
-COPY --from=downloader /opt/models ./
