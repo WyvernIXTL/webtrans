@@ -2,8 +2,9 @@ torch
 torchvision
 torchaudio
 numpy
-clang == 14
+clang==14
 submitit
 six
 sacrebleu == 1.2.11
 Cython
+pyinstaller
