@@ -6,7 +6,7 @@
 
 # syntax=docker/dockerfile:1
 
-# === Download Models and other files
+# === Download Models and other files ===
 
 FROM rockylinux:9 AS downloader
 
@@ -20,9 +20,9 @@ RUN /opt/helper_scripts/download_and_check_against_sha512.sh https://dl.fbaipubl
 RUN /opt/helper_scripts/download_and_check_against_sha512.sh https://dl.fbaipublicfiles.com/transcoder/model_2.pth a5b375fcc6cd919b292f0618ce206226e7408b066466fc30cc3f4430e79650e647c64f0883516eb246309a5c1afadeb48927b38778040c10c32186ed99c01566
 
 
-# === Base Image with Build Tools
+# === Base Image with Python ===
 
-FROM rockylinux:9 as builderbase
+FROM rockylinux:9 as pythonbaseslim
 
 # Enable EPEL
 RUN dnf install epel-release -y
@@ -31,6 +31,15 @@ RUN dnf install epel-release -y
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+RUN dnf install python3 -y
+RUN python3 -m ensurepip
+
+
+# === Base Image with Build Tools ===
+
+FROM pythonbaseslim as builderbase
+
+# Install Python Deleoper Headers
 RUN dnf install python3-devel -y
 RUN python3 -m ensurepip
 
@@ -43,7 +52,7 @@ RUN dnf install python3-clang -y
 RUN dnf install git -y
 
 
-# === Builder Base Image with Helper Scripts, requirements.txt and Symlinks
+# === Builder Base Image with Helper Scripts, requirements.txt and Symlinks ===
 
 FROM builderbase AS builderbaseh
 
@@ -60,7 +69,27 @@ WORKDIR /opt/helper_scripts/
 RUN ./create_symlinks_and_update_requirements_libclang.sh
 
 
-# === Python Dependency Install in VENV
+# === Slim Runner Base with symlinks and libclang libs ===
+
+FROM pythonbaseslim as pythonbaseslimh
+
+# Install Clang Libs
+RUN dnf install clang-libs -y
+
+# Copy of helper scripts.
+WORKDIR /opt
+ADD ./helper_scripts ./helper_scripts
+
+# COPY requirements.txt
+WORKDIR /opt
+COPY requirements.txt .
+
+# Update Clang Version in /opt/requirements.txt and create symlinks
+WORKDIR /opt/helper_scripts/
+RUN ./create_symlinks_and_update_requirements_libclang.sh
+
+
+# === Python Dependency Install in VENV ===
 
 FROM builderbaseh AS pythonbase
 
@@ -72,13 +101,9 @@ RUN pip3 install -r requirements.txt
 RUN pip3 install fastBPE==0.1.0
 
 
-# === Webtrans ENV
+# === TransCoder Download ===
 
-FROM builderbaseh AS transcoderenv
-
-# Fetch Python Venv
-COPY --from=pythonbase /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+FROM builderbase AS transcoderdownloader
 
 # Download facebookresearch Transcoder
 WORKDIR /opt
@@ -90,7 +115,19 @@ RUN sed -i "s|clang.cindex.Config.set_library_path('/usr/lib/llvm-7/lib/')|clang
 RUN echo "Modified file preprocessing/src/code_tokenizer.py changing /usr/lib/llvm-7/lib/ to /usr/lib64 \n this modification is under the same license as this library" >> /opt/TransCoder/MODIFICATIONS.txt
 
 
-# === Deployment
+# === Webtrans ENV ===
+
+FROM pythonbaseslimh AS transcoderenv
+
+# Fetch Python Venv
+COPY --from=pythonbase /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy TransCoder
+COPY --from=transcoderdownloader /opt/TransCoder /opt/TransCoder
+
+
+# === Deployment ===
 
 FROM transcoderenv as deployment
 

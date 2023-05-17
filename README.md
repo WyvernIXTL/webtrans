@@ -5,7 +5,7 @@ IN DEVELOPMENT! NOT FOR PRODUCTION!
 
 ## Getting Started
 ### Building and Running Worker Docker Container
-Important!: Image size > 7 GB.
+Important!: Image size ~ 7 GB.
 
 ```bash
 git clone https://github.com/WyvernIXTL/webtrans.git
