@@ -11,6 +11,8 @@
 // Note: importing with `~` tells webpack to look in the installed npm packages
 // https://stackoverflow.com/questions/39535760/what-does-a-tilde-in-a-css-url-do
 
+@import "bootstrap";
+/* 
 @import 'modern-normalize/modern-normalize.css';
 // Add your own components and import them like this:
 //
@@ -64,3 +66,4 @@ textarea {
   margin: 9px 0;
   padding: 6px 9px;
 }
+ */

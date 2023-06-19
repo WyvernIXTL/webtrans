@@ -15,12 +15,20 @@ abstract class AuthLayout
   def render
     html_doctype
 
-    html lang: "en" do
+    html class: "h-100", lang: "en" do
       mount Shared::LayoutHead, page_title: page_title
-
-      body do
+    
+      body class: "d-flex flex-column h-100" do
         mount Shared::FlashMessages, context.flash
-        content
+        main class: "flex-shrink-0" do
+          content
+        end
+    
+        footer class: "footer mt-auto py-3 bg-light" do
+          div class: "container" do
+            span "Webtrans © 2023 Adam McKellar", class: "text-muted"
+          end
+        end
       end
     end
   end
