@@ -24,11 +24,7 @@ abstract class AuthLayout
           content
         end
     
-        footer class: "footer mt-auto py-3 bg-light" do
-          div class: "container" do
-            span "Webtrans © 2023 Adam McKellar", class: "text-muted"
-          end
-        end
+        mount Shared::Footer
       end
     end
   end

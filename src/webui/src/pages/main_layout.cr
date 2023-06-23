@@ -26,20 +26,18 @@ abstract class MainLayout
   def render
     html_doctype
 
-    html lang: "en" do
+    html class: "h-100", lang: "en" do
       mount Shared::LayoutHead, page_title: page_title
 
-      body do
+      body class: "d-flex flex-column h-100" do
+        mount Shared::Header, user_email: current_user.email
+
         mount Shared::FlashMessages, context.flash
-        render_signed_in_user
+        
         content
+        
+        mount Shared::Footer
       end
     end
-  end
-
-  private def render_signed_in_user
-    text current_user.email
-    text " - "
-    link "Sign out", to: SignIns::Delete, flow_id: "sign-out-button"
   end
 end
