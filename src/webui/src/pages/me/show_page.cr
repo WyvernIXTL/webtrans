@@ -1,21 +1,24 @@
 class Me::ShowPage < MainLayout
   def content
-    h1 "This is your profile"
-    h3 "Email:  #{@current_user.email}"
-    helpful_tips
-  end
+    input = "input"
+    output = "output"
 
-  private def helpful_tips
-    h3 "Next, you may want to:"
-    ul do
-      li { link_to_authentication_guides }
-      li "Modify this page: src/pages/me/show_page.cr"
-      li "Change where you go after sign in: src/actions/home/index.cr"
+    div class: "container h-100 w-100" do 
+      div class: "row h-100 w-100" do
+        div class: "col" do
+          div class: "form-floating mx-auto h-100 py-2 ms-2" do
+            textarea input, class: "form-control mx-auto h-100"
+          end
+        end
+        div class: "col-md-auto my-auto" do
+          submit "Go!", class: "btn btn-outline-secondary p-3 mx-auto my-auto"
+        end 
+        div class: "col" do
+          div class: "form-floating mx-auto h-100 py-2 me-2" do
+            textarea output, class: "form-control mx-auto h-100", attrs: [:readonly]
+          end
+        end
+      end
     end
-  end
-
-  private def link_to_authentication_guides
-    a "Check out the authentication guides",
-      href: "https://luckyframework.org/guides/authentication"
   end
 end
