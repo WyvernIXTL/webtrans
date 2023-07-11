@@ -1,0 +1,17 @@
+name: background_runner
+version: 0.1.0
+
+authors:
+  - Adam McKellar <100924950+WyvernIXTL@users.noreply.github.com>
+
+targets:
+  background_runner:
+    main: src/background_runner.cr
+
+dependencies:
+  pg:
+    github: will/crystal-pg
+
+crystal: 1.8.2
+
+license: MPL-2.0

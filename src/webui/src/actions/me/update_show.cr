@@ -1,3 +1,8 @@
+# Copyright (C) 2023 Adam McKellar
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 class Me::UpdateShow < BrowserAction
   post "/me" do
     SaveTranscompileTask.create(params) do |operation, transcompile_task|
@@ -5,7 +10,7 @@ class Me::UpdateShow < BrowserAction
         flash.success = "Task saved"
         html ShowPage, operation: operation
       else
-        flash.failure = "Something went wrong"
+        flash.failure = operation.errors.to_s
         html ShowPage, operation: operation, output: "Please try again."
       end
     end
