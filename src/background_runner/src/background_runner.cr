@@ -46,6 +46,10 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
           input = IO::Memory.new(input_code)
           output = IO::Memory.new
 
+          puts inp_lang
+          puts outp_lang
+          puts input_code
+
           begin
             Process.run(python_exec, exec_params, input: input, output: output)
             db.exec "UPDATE transcompile_tasks SET output_code = '#{output.to_s}', completed = TRUE WHERE id = #{id}"
@@ -57,6 +61,8 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
               puts exx.message
             end
           end
+
+          puts output.to_s
         end
       end
       sleep 2.seconds

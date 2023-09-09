@@ -142,10 +142,6 @@ RUN shards build --production --release --static
 
 FROM transcoderenv as deployment
 
-ENV WEBTRANS_POSTGRES_URL="postgres://postgres:changeme@localhost:5432/webui_development"
-ENV WEBTRANS_PYTHON_EXECUTABLE_PATH="python3"
-ENV WEBTRANS_PYTHON_SCRIPT="/opt/TransCoder/translate.py"
-ENV WEBTRANS_MODEL_1="/opt/models/model_1.pth"
-ENV WEBTRANS_MODEL_2="/opt/models/model_2.pth"
-
 COPY --from=cralp /opt/background_runner/bin/ /opt/background_runner/bin/
+
+WORKDIR /opt/TransCoder
