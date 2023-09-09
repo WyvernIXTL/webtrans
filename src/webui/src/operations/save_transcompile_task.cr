@@ -1,7 +1,12 @@
+# Copyright (C) 2023 Adam McKellar
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+
 class SaveTranscompileTask < TranscompileTask::SaveOperation
-  # To save user provided params to the database, you must permit them
-  # https://luckyframework.org/guides/database/saving-records#perma-permitting-columns
-  #
+  needs current_user : User? = nil
+
   permit_columns input_code, inp_lang, outp_lang
   
   before_save do
@@ -13,6 +18,9 @@ class SaveTranscompileTask < TranscompileTask::SaveOperation
     end
     if inp_lang.value == outp_lang.value
       outp_lang.add_error("Cannot transcompile from #{inp_lang.value} to #{outp_lang.value}")
+    end
+    if !current_user.nil?
+      priority.value = 1
     end
   end
 

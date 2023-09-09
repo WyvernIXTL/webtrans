@@ -4,6 +4,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 class Me::Show < BrowserAction
+  include Auth::AllowGuests
+
   get "/me" do
     op = SaveTranscompileTask.new
     html ShowPage,  operation: op

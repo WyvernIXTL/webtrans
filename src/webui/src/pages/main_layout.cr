@@ -1,24 +1,17 @@
+# Copyright (C) 2023 Adam McKellar
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+
 abstract class MainLayout
   include Lucky::HTMLPage
 
-  # 'needs current_user : User' makes it so that the current_user
-  # is always required for pages using MainLayout
-  needs current_user : User
+  needs current_user : User?
 
   abstract def content
   abstract def page_title
 
-  # MainLayout defines a default 'page_title'.
-  #
-  # Add a 'page_title' method to your indivual pages to customize each page's
-  # title.
-  #
-  # Or, if you want to require every page to set a title, change the
-  # 'page_title' method in this layout to:
-  #
-  #    abstract def page_title : String
-  #
-  # This will force pages to define their own 'page_title' method.
   def page_title
     "Welcome"
   end
@@ -30,7 +23,12 @@ abstract class MainLayout
       mount Shared::LayoutHead, page_title: page_title
 
       body class: "d-flex flex-column h-100" do
-        mount Shared::Header, user_email: current_user.email
+        user = @current_user
+        if user
+          mount Shared::Header, user_email: user.email
+        else
+          mount Shared::Header, user_email: nil
+        end
 
         mount Shared::FlashMessages, context.flash
         

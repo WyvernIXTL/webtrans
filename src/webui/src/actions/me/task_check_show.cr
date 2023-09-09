@@ -4,6 +4,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 class Me::TaskCheckPage < BrowserAction
+    include Auth::AllowGuests
+
     get "/me/:task_id" do
         begin
             task = TranscompileTaskQuery.find(task_id)
