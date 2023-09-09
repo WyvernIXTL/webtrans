@@ -126,10 +126,12 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Copy TransCoder
 COPY --from=transcoderdownloader /opt/TransCoder /opt/TransCoder
 
+COPY --from=downloader /opt/models /opt/models
+
 
 # === Deployment ===
 
 FROM transcoderenv as deployment
 
-COPY --from=downloader /opt/models /opt/models
+
 

@@ -6,76 +6,44 @@
 class ApiDocumentation::ApiDocumentation < AuthLayout
     def content
         div class: "container pl-4" do
-            h1 "API Documentation", class: "display-5 fw-bold py-2 pl-3"
-
-            h3 "Creating an API Token with existing Account"
-            pre do
-                code class: "lang-bash" do
-                    text "curl <<DOMAIN>>/api/sign_ups -X POST "
-                    span "-d", class: "hljs-_"
-                    span "\"user:email=person@example.com\"", class: "hljs-string"
-                    span "-d", class: "hljs-_"
-                    span "\"user:password=password\"", class: "hljs-string"
-                end
-            end
-
-            h3 "Creating an API Token with new Account"
-            pre do
-                code class: "lang-bash" do
-                    text "curl <<DOMAIN>>/api/sign_ups -X POST "
-                    span "-d", class: "hljs-_"
-                    span "\"user:email=person@example.com\"", class: "hljs-string"
-                    span "-d", class: "hljs-_"
-                    span "\"user:password=password\"", class: "hljs-string"
-                    span "-d", class: "hljs-_"
-                    span "\"user:password_confirmation=password\"", class: "hljs-string"
-                end
-            end
-
-            h3 "Creating an Task"
-            pre do
-                code class: "lang-bash" do
-                    text "curl "
-                    span "<<DOMAIN>", class: "hljs-variable"
-                    text ">/api/createtask -X POST -H "
-                    span "\"Content-Type: application/json\"", class: "hljs-string"
-                    text " -d '{ "
-                    span "\"auth_token\"", class: "hljs-string"
-                    text ": "
-                    span "\"<<YourToken>>\"", class: "hljs-string"
-                    text ", "
-                    span "\"transcompile_task\"", class: "hljs-string"
-                    text ": { "
-                    span "\"inp_lang\"", class: "hljs-string"
-                    text ": "
-                    span "\"<<cpp|java|python>>\"", class: "hljs-string"
-                    text ", "
-                    span "\"outp_lang\"", class: "hljs-string"
-                    text ": "
-                    span "\"<<cpp|java|python>>\"", class: "hljs-string"
-                    text ", "
-                    span "\"input_code\"", class: "hljs-string"
-                    text ": "
-                    span "\"<<YourInputCode>>\"", class: "hljs-string"
-                    text " } }' "
-                end
-            end
-
-            h3 "Checking the Task"
-            pre do
-                code class: "lang-bash" do
-                    text "curl "
-                    span "<<DOMAIN>", class: "hljs-params"
-                    text ">"
-                    span "/api/", class: "hljs-meta-keyword"
-                    text "checktask/"
-                    span "<<ID>", class: "hljs-params"
-                    text "> -X GET -d "
-                    span "<<YourToken>", class: "hljs-params"
-                    text ">"
-                    span "\"", class: "hljs-string"
-                end
-            end
+            raw <<-HTML
+            <h2 id="usage">Usage</h2>
+            <h3 id="the-api">The API</h3>
+            <h4 id="create-token-with-login">Create Token with Login</h4>
+            <pre><code class="lang-bash">curl example.com/api/sign_ins -X POST <span class="hljs-_">-d</span> <span class="hljs-string">"user:email=user@example.com"</span> <span class="hljs-_">-d</span> <span class="hljs-string">"user:password=changeme"</span>
+            </code></pre>
+            <p>returns</p>
+            <pre><code class="lang-json">{<span class="hljs-attr">"token"</span>:<span class="hljs-string">"your-token"</span>}
+            </code></pre>
+            <h4 id="create-token-through-signup">Create Token through Signup</h4>
+            <pre><code class="lang-bash">curl example.com/api/sign_ups -X POST <span class="hljs-_">-d</span> <span class="hljs-string">"user:email=user@example.com"</span> <span class="hljs-_">-d</span> <span class="hljs-string">"user:password=changeme"</span> <span class="hljs-_">-d</span> <span class="hljs-string">"user:password_confirmation=changeme"</span>
+            </code></pre>
+            <p>returns</p>
+            <pre><code class="lang-json">{<span class="hljs-attr">"token"</span>:<span class="hljs-string">"your-token"</span>}
+            </code></pre>
+            <h4 id="create-transcompilation-task">Create Transcompilation Task</h4>
+            <pre><code class="lang-bash">curl <span class="hljs-built_in">example</span>.com/api/createtask -X POST -H <span class="hljs-string">"Content-Type: application/json"</span> -d '{
+                <span class="hljs-string">"auth_token"</span>: <span class="hljs-string">"your-token"</span>,
+                <span class="hljs-string">"transcompile_task"</span>: {
+                    <span class="hljs-string">"inp_lang"</span>: <span class="hljs-string">"inp-lang"</span>,
+                    <span class="hljs-string">"outp_lang"</span>: <span class="hljs-string">"outp-lang"</span>,
+                    <span class="hljs-string">"input_code"</span>: <span class="hljs-string">"your-encoded-code"</span>
+                }
+            }'
+            </code></pre>
+            <p>returns</p>
+            <pre><code class="lang-json">{<span class="hljs-attr">"id"</span>:<span class="hljs-string">"task-id"</span>}
+            </code></pre>
+            <h4 id="check-transcompilation-task">Check Transcompilation Task</h4>
+            <pre><code class="lang-bash">curl example.com/api/checktask/<span class="hljs-keyword">task</span>-id -X GET -d <span class="hljs-string">"auth_token=your-token"</span>
+            </code></pre>
+            <p>returns on success if finished (200)</p>
+            <pre><code class="lang-json">{<span class="hljs-attr">"id"</span>: <span class="hljs-string">"task-id"</span>, <span class="hljs-attr">"completed"</span>: <span class="hljs-string">"true"</span>, <span class="hljs-attr">"output_code"</span>: <span class="hljs-string">"output_code"</span>}
+            </code></pre>
+            <p>if not finished (200)</p>
+            <pre><code class="lang-json">{<span class="hljs-attr">"id"</span>: <span class="hljs-string">"task-id"</span>, <span class="hljs-attr">"completed"</span>: <span class="hljs-string">"false"</span>}
+            </code></pre>
+            HTML
         end
     end
 end
