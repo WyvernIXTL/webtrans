@@ -8,7 +8,18 @@ class ApiDocumentation::ApiDocumentation < AuthLayout
         div class: "container pl-4" do
             h1 "API Documentation", class: "display-5 fw-bold py-2 pl-3"
 
-            h3 "Creating an API Token"
+            h3 "Creating an API Token with existing Account"
+            pre do
+                code class: "lang-bash" do
+                    text "curl <<DOMAIN>>/api/sign_ups -X POST "
+                    span "-d", class: "hljs-_"
+                    span "\"user:email=person@example.com\"", class: "hljs-string"
+                    span "-d", class: "hljs-_"
+                    span "\"user:password=password\"", class: "hljs-string"
+                end
+            end
+
+            h3 "Creating an API Token with new Account"
             pre do
                 code class: "lang-bash" do
                     text "curl <<DOMAIN>>/api/sign_ups -X POST "

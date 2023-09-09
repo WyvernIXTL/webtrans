@@ -8,7 +8,7 @@ class Me::UpdateShow < BrowserAction
     SaveTranscompileTask.create(params) do |operation, transcompile_task|
       if transcompile_task
         flash.success = "Task saved"
-        html ShowPage, operation: operation
+        redirect to: "/me/#{transcompile_task.id}"
       else
         flash.failure = operation.errors.to_s
         html ShowPage, operation: operation, output: "Please try again."

@@ -4,9 +4,6 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 class Me::Show < BrowserAction
-  param input : String = "input"
-  param output : String = "output"
-
   get "/me" do
     op = SaveTranscompileTask.new
     html ShowPage,  operation: op
