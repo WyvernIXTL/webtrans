@@ -13,7 +13,7 @@ cd webtrans/src
 docker compose build
 docker compose up
 ```
-Should result in the websize running on [127.0.0.1:8085](http://127.0.0.1:8085/)
+Should result in the website running on [127.0.0.1:8085](http://127.0.0.1:8085/)
 
 ### Configure
 Before deployment you should configure some env variables in the docker compose file:
