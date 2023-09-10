@@ -19,6 +19,10 @@ ORDER BY priority ASC
 LIMIT 1
 SQL
 
+PREFIX_CHOP = <<-STRING
+====================
+STRING
+
 def background_runner_loop(db_url : String, python_exec : String, exec_params : Array(String), model1 : String, model2 : String)
   DB.open(db_url) do |db|
     loop do
@@ -68,7 +72,7 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
 
           begin
             Process.run(python_exec, exec_params, env: {"PATH" => ENV["PATH"]}, input: input, output: output, error: err)
-            db.exec "UPDATE transcompile_tasks SET output_code = '#{output.to_s}', completed = TRUE WHERE id = #{id}"
+            db.exec "UPDATE transcompile_tasks SET output_code = '#{output.to_s().lchop(PREFIX_CHOP).lchop()}', completed = TRUE WHERE id = #{id}"
             puts "LOG: Transcode finished."
           rescue ex
             begin 

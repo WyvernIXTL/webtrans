@@ -3,10 +3,10 @@ WebTrans 2023 project
 
 IN DEVELOPMENT! NOT FOR PRODUCTION!
 
-
 ## Usage
 
 ### Quick Start
+For now, you need an nvidea gpu.
 ```bash
 git clone https://github.com/WyvernIXTL/webtrans.git
 cd webtrans/src
@@ -85,6 +85,10 @@ python3 translate.py --src_lang <<cpp|python|java>> --tgt_lang <<cpp|python|java
 #### Troubleshooting
 * Make sure to have enough RAM (wsl might crash with just 3GB)
 
-
 #### License
 The project is under MPL 2.0
+
+#### Screenshots
+![homescreen](/assets/homescreen_0.1.1.png)
+![taskcreation](/assets/taskcreation_0.1.1.png)
+![taskcompletion](/assets/taskcompletion_0.1.1.png)
