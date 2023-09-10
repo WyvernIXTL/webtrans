@@ -4,6 +4,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+# This is just terrible. If the error is not read out, the output is ignored. 6h of troubleshoooting...
+
 require "db"
 require "pg"
 require "process"
@@ -25,34 +27,49 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
           input_code, id, inp_lang, outp_lang = rs.read(String, Int, String, String)
 
           if inp_lang == "java"
-            exec_params << "--src_lang java"
-            exec_params << "--tgt_lang #{outp_lang}"
-            exec_params << "--model_path #{model1}"
+            exec_params << "--src_lang" 
+            exec_params << "java"
+            exec_params << "--tgt_lang"
+            exec_params << outp_lang
+            exec_params << "--model_path"
+            exec_params << model1
           elsif inp_lang == "python"
-            exec_params << "--src_lang python"
-            exec_params << "--tgt_lang #{outp_lang}"
-            exec_params << "--model_path #{model2}"
+            exec_params << "--src_lang"
+            exec_params << "python"
+            exec_params << "--tgt_lang"
+            exec_params << outp_lang
+            exec_params << "--model_path"
+            exec_params << model2
           else
-            exec_params << "--src_lang cpp"
+            exec_params << "--src_lang"
+            exec_params << "cpp"
             if outp_lang == "java"
-              exec_params << "--tgt_lang java"
-              exec_params << "--model_path #{model1}"
+              exec_params << "--tgt_lang"
+              exec_params << "java"
+              exec_params << "--model_path"
+              exec_params << model1
             else
-              exec_params << "--tgt_lang python"
-              exec_params << "--model_path #{model2}"
+              exec_params << "--tgt_lang"
+              exec_params << "python"
+              exec_params << "--model_path"
+              exec_params << model2
             end
           end
 
           input = IO::Memory.new(input_code)
           output = IO::Memory.new
+          err = IO::Memory.new
 
-          puts inp_lang
-          puts outp_lang
-          puts input_code
+          # puts inp_lang
+          # puts outp_lang
+          # puts input_code
+
+          puts "LOG: Transcoding -- inp_lang:#{inp_lang} -- outp_lang:#{outp_lang}"
 
           begin
-            Process.run(python_exec, exec_params, input: input, output: output)
+            Process.run(python_exec, exec_params, env: {"PATH" => ENV["PATH"]}, input: input, output: output, error: err)
             db.exec "UPDATE transcompile_tasks SET output_code = '#{output.to_s}', completed = TRUE WHERE id = #{id}"
+            puts "LOG: Transcode finished."
           rescue ex
             begin 
               db.exec "UPDATE transcompile_tasks SET output_code = '#{ex.message}', completed = TRUE WHERE id = #{id}"
@@ -61,8 +78,12 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
               puts exx.message
             end
           end
+          
 
-          puts output.to_s
+          # puts "err"
+          # puts err.to_s
+          # puts "out"
+          # puts output.to_s
         end
       end
       sleep 2.seconds

@@ -115,6 +115,16 @@ RUN sed -i "s|clang.cindex.Config.set_library_path('/usr/lib/llvm-7/lib/')|clang
 RUN echo "Modified file preprocessing/src/code_tokenizer.py changing /usr/lib/llvm-7/lib/ to /usr/lib64 \n this modification is under the same license as this library" >> /opt/TransCoder/MODIFICATIONS.txt
 
 
+# === Building Background Runner ===
+
+FROM crystallang/crystal:1.9-alpine AS cralp
+WORKDIR /opt
+COPY ./background_runner ./background_runner
+WORKDIR /opt/background_runner
+RUN shards install
+RUN shards build --production --release --static
+
+
 # === Webtrans ENV ===
 
 FROM pythonbaseslimh AS transcoderenv
@@ -128,20 +138,7 @@ COPY --from=transcoderdownloader /opt/TransCoder /opt/TransCoder
 
 COPY --from=downloader /opt/models /opt/models
 
-
-# === Building Background Runner ===
-FROM crystallang/crystal:1.9-alpine AS cralp
-WORKDIR /opt
-COPY ./background_runner ./background_runner
-WORKDIR /opt/background_runner
-RUN shards install
-RUN shards build --production --release --static
-
-
-# === Deployment ===
-
-FROM transcoderenv as deployment
-
 COPY --from=cralp /opt/background_runner/bin/ /opt/background_runner/bin/
 
 WORKDIR /opt/TransCoder
+

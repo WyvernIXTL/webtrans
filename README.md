@@ -3,26 +3,23 @@ WebTrans 2023 project
 
 IN DEVELOPMENT! NOT FOR PRODUCTION!
 
-## Getting Started
-### Building and Running Worker Docker Container
-Important!: Image size ~ 7 GB.
-
-```bash
-git clone https://github.com/WyvernIXTL/webtrans.git
-cd ./webtrans/src
-docker build -t wt_worker_debug .
-```
-Running with cuda enabled gpu:
-```bash
-docker run -it --rm --gpus <gpuid> wt_worker_debug
-```
-Running TransCoder:
-```bash
-cd /opt/TransCoder
-python3 translate.py
-```
 
 ## Usage
+
+### Quick Start
+```bash
+git clone https://github.com/WyvernIXTL/webtrans.git
+cd webtrans/src
+docker compose build
+docker compose up
+```
+Should result in the websize running on [127.0.0.1:8085](http://127.0.0.1:8085/)
+
+### Configure
+Before deployment you should configure some env variables in the docker compose file:
+* `SECRET_KEY_BASE`
+* `APP_DOMAIN`
+
 
 ### The API
 
@@ -72,3 +69,22 @@ if not finished (200)
 ```json
 {"id": "task-id", "completed": "false"}
 ```
+
+
+### MISC
+
+#### Use the Facebookresearch Transcoder Standalone
+```bash
+git clone https://github.com/WyvernIXTL/webtrans.git
+cd ./webtrans/src
+docker compose build
+docker --it --rm --gpus all src-transcoder
+python3 translate.py --src_lang <<cpp|python|java>> --tgt_lang <<cpp|python|java>> --model_path /opt/models/model_<<1|2>>.pth < inputfile
+```
+
+#### Troubleshooting
+* Make sure to have enough RAM (wsl might crash with just 3GB)
+
+
+#### License
+The project is under MPL 2.0
