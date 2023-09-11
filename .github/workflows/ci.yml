@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SKIP_LUCKY_TASK_PRECOMPILATION: "1"
     steps:
       - name: Download source
         uses: actions/checkout@v2
