@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.8.2">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="webtrans">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="webtrans">
+  <title>TranscompileTask::BaseQuery - webtrans main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          webtrans
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="webtrans/Api" data-name="api">
+      <a href="../Api.html">Api</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="webtrans/Api/Auth" data-name="api::auth">
+      <a href="../Api/Auth.html">Auth</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Api/Auth/Helpers" data-name="api::auth::helpers">
+      <a href="../Api/Auth/Helpers.html">Helpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Api/Auth/RequireAuthToken" data-name="api::auth::requireauthtoken">
+      <a href="../Api/Auth/RequireAuthToken.html">RequireAuthToken</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Api/Auth/SkipRequireAuthToken" data-name="api::auth::skiprequireauthtoken">
+      <a href="../Api/Auth/SkipRequireAuthToken.html">SkipRequireAuthToken</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Api/Me" data-name="api::me">
+      <a href="../Api/Me.html">Me</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Api/Me/Show" data-name="api::me::show">
+      <a href="../Api/Me/Show.html">Show</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Api/SignIns" data-name="api::signins">
+      <a href="../Api/SignIns.html">SignIns</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Api/SignIns/Create" data-name="api::signins::create">
+      <a href="../Api/SignIns/Create.html">Create</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Api/SignUps" data-name="api::signups">
+      <a href="../Api/SignUps.html">SignUps</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Api/SignUps/Create" data-name="api::signups::create">
+      <a href="../Api/SignUps/Create.html">Create</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Api/Tasks" data-name="api::tasks">
+      <a href="../Api/Tasks.html">Tasks</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Api/Tasks/CheckTask" data-name="api::tasks::checktask">
+      <a href="../Api/Tasks/CheckTask.html">CheckTask</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Api/Tasks/CreateTask" data-name="api::tasks::createtask">
+      <a href="../Api/Tasks/CreateTask.html">CreateTask</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/ApiAction" data-name="apiaction">
+      <a href="../ApiAction.html">ApiAction</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/ApiDocumentation" data-name="apidocumentation">
+      <a href="../ApiDocumentation.html">ApiDocumentation</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/ApiDocumentation/ApiDocumentation" data-name="apidocumentation::apidocumentation">
+      <a href="../ApiDocumentation/ApiDocumentation.html">ApiDocumentation</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/ApiDocumentationAction" data-name="apidocumentationaction">
+      <a href="../ApiDocumentationAction.html">ApiDocumentationAction</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/ApiDocumentationAction/Show" data-name="apidocumentationaction::show">
+      <a href="../ApiDocumentationAction/Show.html">Show</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/AppDatabase" data-name="appdatabase">
+      <a href="../AppDatabase.html">AppDatabase</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/AppDatabase/HabitatSettings" data-name="appdatabase::habitatsettings">
+      <a href="../AppDatabase/HabitatSettings.html">HabitatSettings</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/AppServer" data-name="appserver">
+      <a href="../AppServer.html">AppServer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Auth" data-name="auth">
+      <a href="../Auth.html">Auth</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Auth/AllowGuests" data-name="auth::allowguests">
+      <a href="../Auth/AllowGuests.html">AllowGuests</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Auth/PasswordResets" data-name="auth::passwordresets">
+      <a href="../Auth/PasswordResets.html">PasswordResets</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Auth/PasswordResets/Base" data-name="auth::passwordresets::base">
+      <a href="../Auth/PasswordResets/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Auth/PasswordResets/FindUser" data-name="auth::passwordresets::finduser">
+      <a href="../Auth/PasswordResets/FindUser.html">FindUser</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Auth/PasswordResets/RequireToken" data-name="auth::passwordresets::requiretoken">
+      <a href="../Auth/PasswordResets/RequireToken.html">RequireToken</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Auth/PasswordResets/TokenFromSession" data-name="auth::passwordresets::tokenfromsession">
+      <a href="../Auth/PasswordResets/TokenFromSession.html">TokenFromSession</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Auth/RedirectSignedInUsers" data-name="auth::redirectsignedinusers">
+      <a href="../Auth/RedirectSignedInUsers.html">RedirectSignedInUsers</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Auth/RequireSignIn" data-name="auth::requiresignin">
+      <a href="../Auth/RequireSignIn.html">RequireSignIn</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Auth/TestBackdoor" data-name="auth::testbackdoor">
+      <a href="../Auth/TestBackdoor.html">TestBackdoor</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/AuthLayout" data-name="authlayout">
+      <a href="../AuthLayout.html">AuthLayout</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/BaseComponent" data-name="basecomponent">
+      <a href="../BaseComponent.html">BaseComponent</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/BaseEmail" data-name="baseemail">
+      <a href="../BaseEmail.html">BaseEmail</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/BaseEmail/HabitatSettings" data-name="baseemail::habitatsettings">
+      <a href="../BaseEmail/HabitatSettings.html">HabitatSettings</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/BaseModel" data-name="basemodel">
+      <a href="../BaseModel.html">BaseModel</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/BaseSerializer" data-name="baseserializer">
+      <a href="../BaseSerializer.html">BaseSerializer</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/BrowserAction" data-name="browseraction">
+      <a href="../BrowserAction.html">BrowserAction</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/DeleteTranscompileTask" data-name="deletetranscompiletask">
+      <a href="../DeleteTranscompileTask.html">DeleteTranscompileTask</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Errors" data-name="errors">
+      <a href="../Errors.html">Errors</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Errors/Show" data-name="errors::show">
+      <a href="../Errors/Show.html">Show</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Errors/ShowPage" data-name="errors::showpage">
+      <a href="../Errors/ShowPage.html">ShowPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/ErrorSerializer" data-name="errorserializer">
+      <a href="../ErrorSerializer.html">ErrorSerializer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Home" data-name="home">
+      <a href="../Home.html">Home</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Home/Index" data-name="home::index">
+      <a href="../Home/Index.html">Index</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Home/IndexPage" data-name="home::indexpage">
+      <a href="../Home/IndexPage.html">IndexPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/LicenseDocumentation" data-name="licensedocumentation">
+      <a href="../LicenseDocumentation.html">LicenseDocumentation</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/LicenseDocumentation/LicenseDocumentation" data-name="licensedocumentation::licensedocumentation">
+      <a href="../LicenseDocumentation/LicenseDocumentation.html">LicenseDocumentation</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/LicenseDocumentationAction" data-name="licensedocumentationaction">
+      <a href="../LicenseDocumentationAction.html">LicenseDocumentationAction</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/LicenseDocumentationAction/Show" data-name="licensedocumentationaction::show">
+      <a href="../LicenseDocumentationAction/Show.html">Show</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/MainLayout" data-name="mainlayout">
+      <a href="../MainLayout.html">MainLayout</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Me" data-name="me">
+      <a href="../Me.html">Me</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Me/Show" data-name="me::show">
+      <a href="../Me/Show.html">Show</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Me/ShowPage" data-name="me::showpage">
+      <a href="../Me/ShowPage.html">ShowPage</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Me/TaskCheckPage" data-name="me::taskcheckpage">
+      <a href="../Me/TaskCheckPage.html">TaskCheckPage</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Me/UpdateShow" data-name="me::updateshow">
+      <a href="../Me/UpdateShow.html">UpdateShow</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/MeUpdate" data-name="meupdate">
+      <a href="../MeUpdate.html">MeUpdate</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/MeUpdate/TaskCheckPage" data-name="meupdate::taskcheckpage">
+      <a href="../MeUpdate/TaskCheckPage.html">TaskCheckPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/PasswordResetRequestEmail" data-name="passwordresetrequestemail">
+      <a href="../PasswordResetRequestEmail.html">PasswordResetRequestEmail</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/PasswordResetRequestEmail/HabitatSettings" data-name="passwordresetrequestemail::habitatsettings">
+      <a href="../PasswordResetRequestEmail/HabitatSettings.html">HabitatSettings</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/PasswordResetRequests" data-name="passwordresetrequests">
+      <a href="../PasswordResetRequests.html">PasswordResetRequests</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/PasswordResetRequests/Create" data-name="passwordresetrequests::create">
+      <a href="../PasswordResetRequests/Create.html">Create</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/PasswordResetRequests/New" data-name="passwordresetrequests::new">
+      <a href="../PasswordResetRequests/New.html">New</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/PasswordResetRequests/NewPage" data-name="passwordresetrequests::newpage">
+      <a href="../PasswordResetRequests/NewPage.html">NewPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/PasswordResets" data-name="passwordresets">
+      <a href="../PasswordResets.html">PasswordResets</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/PasswordResets/Create" data-name="passwordresets::create">
+      <a href="../PasswordResets/Create.html">Create</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/PasswordResets/Edit" data-name="passwordresets::edit">
+      <a href="../PasswordResets/Edit.html">Edit</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/PasswordResets/New" data-name="passwordresets::new">
+      <a href="../PasswordResets/New.html">New</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/PasswordResets/NewPage" data-name="passwordresets::newpage">
+      <a href="../PasswordResets/NewPage.html">NewPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/PasswordValidations" data-name="passwordvalidations">
+      <a href="../PasswordValidations.html">PasswordValidations</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/RequestPasswordReset" data-name="requestpasswordreset">
+      <a href="../RequestPasswordReset.html">RequestPasswordReset</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/ResetPassword" data-name="resetpassword">
+      <a href="../ResetPassword.html">ResetPassword</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SaveTranscompileTask" data-name="savetranscompiletask">
+      <a href="../SaveTranscompileTask.html">SaveTranscompileTask</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/Shared" data-name="shared">
+      <a href="../Shared.html">Shared</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/Shared/Field" data-name="shared::field(t)">
+      <a href="../Shared/Field.html">Field</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Shared/FieldErrors" data-name="shared::fielderrors(t)">
+      <a href="../Shared/FieldErrors.html">FieldErrors</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Shared/FlashMessages" data-name="shared::flashmessages">
+      <a href="../Shared/FlashMessages.html">FlashMessages</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Shared/Footer" data-name="shared::footer">
+      <a href="../Shared/Footer.html">Footer</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Shared/Header" data-name="shared::header">
+      <a href="../Shared/Header.html">Header</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/Shared/LayoutHead" data-name="shared::layouthead">
+      <a href="../Shared/LayoutHead.html">LayoutHead</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/SignIns" data-name="signins">
+      <a href="../SignIns.html">SignIns</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/SignIns/Create" data-name="signins::create">
+      <a href="../SignIns/Create.html">Create</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignIns/Delete" data-name="signins::delete">
+      <a href="../SignIns/Delete.html">Delete</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignIns/New" data-name="signins::new">
+      <a href="../SignIns/New.html">New</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignIns/NewPage" data-name="signins::newpage">
+      <a href="../SignIns/NewPage.html">NewPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignInUser" data-name="signinuser">
+      <a href="../SignInUser.html">SignInUser</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/SignUps" data-name="signups">
+      <a href="../SignUps.html">SignUps</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/SignUps/Create" data-name="signups::create">
+      <a href="../SignUps/Create.html">Create</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignUps/New" data-name="signups::new">
+      <a href="../SignUps/New.html">New</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignUps/NewPage" data-name="signups::newpage">
+      <a href="../SignUps/NewPage.html">NewPage</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/SignUpUser" data-name="signupuser">
+      <a href="../SignUpUser.html">SignUpUser</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="webtrans/TranscompileTask" data-name="transcompiletask">
+      <a href="../TranscompileTask.html">TranscompileTask</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="webtrans/TranscompileTask/BaseQuery" data-name="transcompiletask::basequery">
+      <a href="../TranscompileTask/BaseQuery.html">BaseQuery</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/TranscompileTask/DeleteOperation" data-name="transcompiletask::deleteoperation">
+      <a href="../TranscompileTask/DeleteOperation.html">DeleteOperation</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/TranscompileTask/PrimaryKeyType" data-name="transcompiletask::primarykeytype">
+      <a href="../TranscompileTask/PrimaryKeyType.html">PrimaryKeyType</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/TranscompileTask/SaveOperation" data-name="transcompiletask::saveoperation">
+      <a href="../TranscompileTask/SaveOperation.html">SaveOperation</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/TranscompileTaskQuery" data-name="transcompiletaskquery">
+      <a href="../TranscompileTaskQuery.html">TranscompileTaskQuery</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/User" data-name="user">
+      <a href="../User.html">User</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/User/BaseQuery" data-name="user::basequery">
+      <a href="../User/BaseQuery.html">BaseQuery</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/User/DeleteOperation" data-name="user::deleteoperation">
+      <a href="../User/DeleteOperation.html">DeleteOperation</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/User/PrimaryKeyType" data-name="user::primarykeytype">
+      <a href="../User/PrimaryKeyType.html">PrimaryKeyType</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/User/SaveOperation" data-name="user::saveoperation">
+      <a href="../User/SaveOperation.html">SaveOperation</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/UserFromEmail" data-name="userfromemail">
+      <a href="../UserFromEmail.html">UserFromEmail</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/UserQuery" data-name="userquery">
+      <a href="../UserQuery.html">UserQuery</a>
+      
+    </li>
+  
+  <li class=" " data-id="webtrans/UserSerializer" data-name="userserializer">
+      <a href="../UserSerializer.html">UserSerializer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="webtrans/UserToken" data-name="usertoken">
+      <a href="../UserToken.html">UserToken</a>
+      
+        <ul>
+  
+  <li class=" " data-id="webtrans/UserToken/HabitatSettings" data-name="usertoken::habitatsettings">
+      <a href="../UserToken/HabitatSettings.html">HabitatSettings</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> TranscompileTask::BaseQuery
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../TranscompileTask/BaseQuery.html">TranscompileTask::BaseQuery</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Avram::PrimaryKeyQueryable(<a href="../TranscompileTask.html">TranscompileTask</a>)</li>
+    
+      <li class="other-type">Avram::Queryable(<a href="../TranscompileTask.html">TranscompileTask</a>)</li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../TranscompileTaskQuery.html">TranscompileTaskQuery</a></li>
+    
+  </ul>
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#all%3Aself-class-method" class="signature"><strong>.all</strong> : <span class="k">self</span></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#any%3F%3ABool-class-method" class="signature"><strong>.any?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns <code>true</code> if at least one of the collection's members is truthy.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#find%28id%29-class-method" class="signature"><strong>.find</strong>(id)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#first%3AT-class-method" class="signature"><strong>.first</strong> : T</a>
+        
+          <div class="summary"><p>Returns the first element in the collection.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#first%3F%3AT%7CNil-class-method" class="signature"><strong>.first?</strong> : T | Nil</a>
+        
+          <div class="summary"><p>Returns the first element in the collection.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#last%3AT-class-method" class="signature"><strong>.last</strong> : T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#last%3F%3AT%7CNil-class-method" class="signature"><strong>.last?</strong> : T | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new_with_existing_query%28query%3AAvram%3A%3AQueryBuilder%29-class-method" class="signature"><strong>.new_with_existing_query</strong>(query : Avram::QueryBuilder)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#none%3F%3ABool-class-method" class="signature"><strong>.none?</strong> : Bool</a>
+        
+          <div class="summary"><p>Returns <code>true</code> if all of the elements of the collection are falsey.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#truncate%28%2A%2Ccascade%3ABool%3Dfalse%29-class-method" class="signature"><strong>.truncate</strong>(*, cascade : Bool = <span class="n">false</span>)</a>
+        
+          <div class="summary"><p>Removes all data from a table using the TRUNCATE postgres SQL command.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+          <div class="summary"><p>Returns a copy of <code>self</code> with all instance variables cloned.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#completed%28value%29-instance-method" class="signature"><strong>#completed</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#completed-instance-method" class="signature"><strong>#completed</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#created_at%28value%29-instance-method" class="signature"><strong>#created_at</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#created_at-instance-method" class="signature"><strong>#created_at</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#find%28id%29-instance-method" class="signature"><strong>#find</strong>(id)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#id%28value%29-instance-method" class="signature"><strong>#id</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#id-instance-method" class="signature"><strong>#id</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#inp_lang%28value%29-instance-method" class="signature"><strong>#inp_lang</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#inp_lang-instance-method" class="signature"><strong>#inp_lang</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input_code%28value%29-instance-method" class="signature"><strong>#input_code</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input_code-instance-method" class="signature"><strong>#input_code</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#outp_lang%28value%29-instance-method" class="signature"><strong>#outp_lang</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#outp_lang-instance-method" class="signature"><strong>#outp_lang</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output_code%28value%29-instance-method" class="signature"><strong>#output_code</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output_code-instance-method" class="signature"><strong>#output_code</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#priority%28value%29-instance-method" class="signature"><strong>#priority</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#priority-instance-method" class="signature"><strong>#priority</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#update%28id%3AInt64%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Ccreated_at%3ATime%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cupdated_at%3ATime%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cinput_code%3AString%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Coutput_code%3AString%7CAvram%3A%3ANothing%7CNil%3DAvram%3A%3ANothing.new%2Ccompleted%3ABool%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cpriority%3AInt32%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cinp_lang%3AString%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Coutp_lang%3AString%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%29%3AInt64-instance-method" class="signature"><strong>#update</strong>(id : Int64 | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, created_at : Time | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, updated_at : Time | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, input_code : String | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, output_code : String | Avram::Nothing | Nil = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, completed : Bool | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, priority : Int32 | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, inp_lang : String | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, outp_lang : String | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new) : Int64</a>
+        
+          <div class="summary"><p>Update the records using the query's where clauses, or all records if no wheres are added.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#updated_at%28value%29-instance-method" class="signature"><strong>#updated_at</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#updated_at-instance-method" class="signature"><strong>#updated_at</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="macro-summary" class="anchor" href="#macro-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#generate_criteria_method%28name%2Ctype%29-macro" class="signature"><strong>generate_criteria_method</strong>(name, type)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="all:self-class-method">
+      <div class="signature">
+        
+        def self.<strong>all</strong> : <span class="k">self</span>
+
+        <a class="method-permalink" href="#all%3Aself-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="any?:Bool-class-method">
+      <div class="signature">
+        
+        def self.<strong>any?</strong> : Bool
+
+        <a class="method-permalink" href="#any%3F%3ABool-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable(<a href="../TranscompileTask.html">TranscompileTask</a>)
+            </div>
+          
+          <p>Returns <code>true</code> if at least one of the collection's members is truthy.</p>
+<pre><code class="language-crystal">[<span class="n">nil</span>, <span class="n">true</span>, <span class="n">99</span>].any? <span class="c"># =&gt; true</span>
+[<span class="n">nil</span>, <span class="n">false</span>].any?    <span class="c"># =&gt; false</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="find(id)-class-method">
+      <div class="signature">
+        
+        def self.<strong>find</strong>(id)
+
+        <a class="method-permalink" href="#find%28id%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="first:T-class-method">
+      <div class="signature">
+        
+        def self.<strong>first</strong> : <a href="../TranscompileTask.html">T</a>
+
+        <a class="method-permalink" href="#first%3AT-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable(<a href="../TranscompileTask.html">TranscompileTask</a>)
+            </div>
+          
+          <p>Returns the first element in the collection. Raises <code>Enumerable::EmptyError</code>
+if the collection is empty.</p>
+<pre><code class="language-crystal">([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]).first   <span class="c"># =&gt; 1</span>
+(<span class="o">[]</span> <span class="k">of</span> <span class="t">Int32</span>).first <span class="c"># raises Enumerable::EmptyError</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="first?:T|Nil-class-method">
+      <div class="signature">
+        
+        def self.<strong>first?</strong> : <a href="../TranscompileTask.html">T</a> | Nil
+
+        <a class="method-permalink" href="#first%3F%3AT%7CNil-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable(<a href="../TranscompileTask.html">TranscompileTask</a>)
+            </div>
+          
+          <p>Returns the first element in the collection.
+When the collection is empty, returns <code>nil</code>.</p>
+<pre><code class="language-crystal">([<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]).first?   <span class="c"># =&gt; 1</span>
+(<span class="o">[]</span> <span class="k">of</span> <span class="t">Int32</span>).first? <span class="c"># =&gt; nil</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="last:T-class-method">
+      <div class="signature">
+        
+        def self.<strong>last</strong> : <a href="../TranscompileTask.html">T</a>
+
+        <a class="method-permalink" href="#last%3AT-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="last?:T|Nil-class-method">
+      <div class="signature">
+        
+        def self.<strong>last?</strong> : <a href="../TranscompileTask.html">T</a> | Nil
+
+        <a class="method-permalink" href="#last%3F%3AT%7CNil-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new_with_existing_query(query:Avram::QueryBuilder)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new_with_existing_query</strong>(query : Avram::QueryBuilder)
+
+        <a class="method-permalink" href="#new_with_existing_query%28query%3AAvram%3A%3AQueryBuilder%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="none?:Bool-class-method">
+      <div class="signature">
+        
+        def self.<strong>none?</strong> : Bool
+
+        <a class="method-permalink" href="#none%3F%3ABool-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable(<a href="../TranscompileTask.html">TranscompileTask</a>)
+            </div>
+          
+          <p>Returns <code>true</code> if all of the elements of the collection are falsey.</p>
+<pre><code class="language-crystal">[<span class="n">nil</span>, <span class="n">false</span>].none?       <span class="c"># =&gt; true</span>
+[<span class="n">nil</span>, <span class="n">false</span>, <span class="n">true</span>].none? <span class="c"># =&gt; false</span></code></pre>
+<p>It's the opposite of <code>all?</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="truncate(*,cascade:Bool=false)-class-method">
+      <div class="signature">
+        
+        def self.<strong>truncate</strong>(*, cascade : Bool = <span class="n">false</span>)
+
+        <a class="method-permalink" href="#truncate%28%2A%2Ccascade%3ABool%3Dfalse%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Removes all data from a table using the TRUNCATE postgres SQL command.</p>
+<p>You should run this command with <code>cascade: true</code> if your table
+columns are referenced by other foreign key constraints. Use <em>delete</em>
+instead if you don't want to accidentally delete rows referenced
+elsewhere.</p>
+<p>To delete all data referenced by foreign keys as well, set <em>cascade</em>
+to true.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="clone-instance-method">
+      <div class="signature">
+        
+        def <strong>clone</strong>
+
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns a copy of <code>self</code> with all instance variables cloned.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="completed(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>completed</strong>(value)
+
+        <a class="method-permalink" href="#completed%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="completed-instance-method">
+      <div class="signature">
+        
+        def <strong>completed</strong>
+
+        <a class="method-permalink" href="#completed-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="created_at(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>created_at</strong>(value)
+
+        <a class="method-permalink" href="#created_at%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="created_at-instance-method">
+      <div class="signature">
+        
+        def <strong>created_at</strong>
+
+        <a class="method-permalink" href="#created_at-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="find(id)-instance-method">
+      <div class="signature">
+        
+        def <strong>find</strong>(id)
+
+        <a class="method-permalink" href="#find%28id%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="id(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>id</strong>(value)
+
+        <a class="method-permalink" href="#id%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="id-instance-method">
+      <div class="signature">
+        
+        def <strong>id</strong>
+
+        <a class="method-permalink" href="#id-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="inp_lang(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>inp_lang</strong>(value)
+
+        <a class="method-permalink" href="#inp_lang%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="inp_lang-instance-method">
+      <div class="signature">
+        
+        def <strong>inp_lang</strong>
+
+        <a class="method-permalink" href="#inp_lang-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input_code(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>input_code</strong>(value)
+
+        <a class="method-permalink" href="#input_code%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input_code-instance-method">
+      <div class="signature">
+        
+        def <strong>input_code</strong>
+
+        <a class="method-permalink" href="#input_code-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="outp_lang(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>outp_lang</strong>(value)
+
+        <a class="method-permalink" href="#outp_lang%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="outp_lang-instance-method">
+      <div class="signature">
+        
+        def <strong>outp_lang</strong>
+
+        <a class="method-permalink" href="#outp_lang-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output_code(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>output_code</strong>(value)
+
+        <a class="method-permalink" href="#output_code%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output_code-instance-method">
+      <div class="signature">
+        
+        def <strong>output_code</strong>
+
+        <a class="method-permalink" href="#output_code-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="priority(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>priority</strong>(value)
+
+        <a class="method-permalink" href="#priority%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="priority-instance-method">
+      <div class="signature">
+        
+        def <strong>priority</strong>
+
+        <a class="method-permalink" href="#priority-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="update(id:Int64|Avram::Nothing=Avram::Nothing.new,created_at:Time|Avram::Nothing=Avram::Nothing.new,updated_at:Time|Avram::Nothing=Avram::Nothing.new,input_code:String|Avram::Nothing=Avram::Nothing.new,output_code:String|Avram::Nothing|Nil=Avram::Nothing.new,completed:Bool|Avram::Nothing=Avram::Nothing.new,priority:Int32|Avram::Nothing=Avram::Nothing.new,inp_lang:String|Avram::Nothing=Avram::Nothing.new,outp_lang:String|Avram::Nothing=Avram::Nothing.new):Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>update</strong>(id : Int64 | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, created_at : Time | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, updated_at : Time | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, input_code : String | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, output_code : String | Avram::Nothing | Nil = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, completed : Bool | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, priority : Int32 | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, inp_lang : String | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new, outp_lang : String | Avram::Nothing = <span class="t">Avram</span><span class="t">::</span><span class="t">Nothing</span>.new) : Int64
+
+        <a class="method-permalink" href="#update%28id%3AInt64%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Ccreated_at%3ATime%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cupdated_at%3ATime%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cinput_code%3AString%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Coutput_code%3AString%7CAvram%3A%3ANothing%7CNil%3DAvram%3A%3ANothing.new%2Ccompleted%3ABool%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cpriority%3AInt32%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Cinp_lang%3AString%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%2Coutp_lang%3AString%7CAvram%3A%3ANothing%3DAvram%3A%3ANothing.new%29%3AInt64-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Avram::Queryable(<a href="../TranscompileTask.html">TranscompileTask</a>)
+            </div>
+          
+          <p>Update the records using the query's where clauses, or all records if no wheres are added.</p>
+<p>Returns the number of records updated as <code>Int64</code>.</p>
+<pre><code class="language-crystal"><span class="c"># Update all comments with the word &quot;spam&quot; as spam</span>
+<span class="t">CommentQuery</span>.new.body.ilike(<span class="s">&quot;spam&quot;</span>).update(spam: <span class="n">true</span>)</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="updated_at(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>updated_at</strong>(value)
+
+        <a class="method-permalink" href="#updated_at%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="updated_at-instance-method">
+      <div class="signature">
+        
+        def <strong>updated_at</strong>
+
+        <a class="method-permalink" href="#updated_at-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="macro-detail" class="anchor" href="#macro-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Detail
+  </h2>
+  
+    <div class="entry-detail" id="generate_criteria_method(name,type)-macro">
+      <div class="signature">
+        
+        macro <strong>generate_criteria_method</strong>(name, type)
+
+        <a class="method-permalink" href="#generate_criteria_method%28name%2Ctype%29-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+</div>
+
+</body>
+</html>
