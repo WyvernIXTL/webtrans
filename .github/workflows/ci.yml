@@ -26,6 +26,11 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - name: Install Lucky CLI
+        working-directory: ./src/webui/
+        run: |
+          crystal build src/lucky.cr
+          pwd >> $GITHUB_PATH
       - name: Run setup script
         working-directory: ./src/webui/
         run: ./script/setup
