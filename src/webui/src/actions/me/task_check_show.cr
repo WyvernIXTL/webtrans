@@ -3,6 +3,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+
+# Checks the database for *task_id* of a `TranscompileTask` task and displays it on successfull copmletion.
 class Me::TaskCheckPage < BrowserAction
     include Auth::AllowGuests
 

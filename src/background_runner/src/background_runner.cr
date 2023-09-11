@@ -4,13 +4,16 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-# This is just terrible. If the error is not read out, the output is ignored. 6h of troubleshoooting...
-
 require "db"
 require "pg"
 require "process"
 require "env"
 
+
+# SQL Code for fetching oldest transcoder task with highest priority.
+#
+# Request exactly `input_code`, `inp_lang` and `outp_lang` of one transcompiler task.
+# This transcompiler task is the one with highest priority, else the newes one by default.
 NEXT_JOB = <<-SQL
 SELECT input_code, id, inp_lang, outp_lang
 FROM transcompile_tasks 
@@ -23,6 +26,14 @@ PREFIX_CHOP = <<-STRING
 ====================
 STRING
 
+
+# Loop which reads transcompiler task with highest priority, executes it and writes it back to database.
+#
+# This function opens a connection to the database `db_url` and executes until haltet the following:
+#   1. Executes and read output of query `NEXT_JOB`.
+#   2. Determine which model to use, depending on input and output languages.
+#   3. Execute the transcoder.
+#   4. Write on sucess the output back into database and set task as completed.
 def background_runner_loop(db_url : String, python_exec : String, exec_params : Array(String), model1 : String, model2 : String)
   DB.open(db_url) do |db|
     loop do
@@ -64,10 +75,6 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
           output = IO::Memory.new
           err = IO::Memory.new
 
-          # puts inp_lang
-          # puts outp_lang
-          # puts input_code
-
           puts "LOG: Transcoding -- inp_lang:#{inp_lang} -- outp_lang:#{outp_lang}"
 
           begin
@@ -82,12 +89,7 @@ def background_runner_loop(db_url : String, python_exec : String, exec_params : 
               puts exx.message
             end
           end
-          
 
-          # puts "err"
-          # puts err.to_s
-          # puts "out"
-          # puts output.to_s
         end
       end
       sleep 2.seconds

@@ -4,6 +4,12 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+# Parent class for all pages distinguishing between users and guests.
+#
+# The *current_user* can be nil, meaning that even a guest can enter its children
+# if those do not overwrite this variable.
+# In this class the header and footer are mounted and the header is given the information
+# wether or not to display the logout button and email.
 abstract class MainLayout
   include Lucky::HTMLPage
 

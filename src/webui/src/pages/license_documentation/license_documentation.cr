@@ -3,6 +3,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+
+# Static webpage displaying some information regarding the licensing of the project.
 class LicenseDocumentation::LicenseDocumentation < AuthLayout
     def content
         div class: "container pl-4 mt-2" do

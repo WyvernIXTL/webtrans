@@ -4,6 +4,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+# Homepage with login button and button to proceed as guest.
 class Home::IndexPage < AuthLayout
   def content
     div class: "px-4 py-5 my-5 text-center" do

@@ -4,6 +4,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+# HTML header with button which redirects to `Home::Index` and if logged in, provides a log out button and the users email.
 class Shared::Header < BaseComponent
   needs user_email : String? = nil
 

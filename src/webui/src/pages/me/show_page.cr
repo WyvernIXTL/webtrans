@@ -4,6 +4,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+# Page for createing a `TranscompileTask`.
+#
+# The user is given an input textarea for entering his code and two drop
+# down menus for choosing the input and output language.
+# When pressing the "Go!" button the user is redirected via `Me::UpdateShow` to `MeUpdate::TaskCheckPage`.
 class Me::ShowPage < MainLayout
   needs operation : SaveTranscompileTask
   needs output : String = "Output"

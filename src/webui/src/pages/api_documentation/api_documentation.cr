@@ -3,6 +3,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+
+# Static webpage displaying api documentation, which can also be found on github.
 class ApiDocumentation::ApiDocumentation < AuthLayout
     def content
         div class: "container pl-4" do

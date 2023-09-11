@@ -4,6 +4,12 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
+# Check the input of the user and and save it to the database.
+#
+# This class inherits most of its functionality from `SaveOperation`.
+# The provided logic here is only there to permit the user to actually save certain variables
+# via `permit_columns`, to change priority if the user is logged in, to check validicity of
+# `inp_lang` and `outp_lang` and to check that `inp_lang` and `outp_lang` are not the same.
 class SaveTranscompileTask < TranscompileTask::SaveOperation
   needs current_user : User? = nil
 
