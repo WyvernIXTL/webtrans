@@ -16,7 +16,6 @@ jobs:
         working-directory: ./src/webui/
         run: shards install
       - name: Cache node modules
-        working-directory: ./src/webui/
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
