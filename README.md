@@ -71,9 +71,14 @@ if not finished (200)
 ```
 
 
-### MISC
+## Documentation
+Most documentation of crystal code is done for `crystal docs` to work with it.
+Auto generated webui documentation can be found on [https://wyvernixtl.github.io/webtrans/](https://wyvernixtl.github.io/webtrans/).
 
-#### Use the Facebookresearch Transcoder Standalone
+
+## MISC
+
+### Use the Facebookresearch Transcoder Standalone
 ```bash
 git clone https://github.com/WyvernIXTL/webtrans.git
 cd ./webtrans/src
@@ -82,13 +87,13 @@ docker --it --rm --gpus all src-transcoder
 python3 translate.py --src_lang <<cpp|python|java>> --tgt_lang <<cpp|python|java>> --model_path /opt/models/model_<<1|2>>.pth < inputfile
 ```
 
-#### Troubleshooting
+### Troubleshooting
 * Make sure to have enough RAM (wsl might crash with just 3GB)
 
-#### License
+### License
 The project is under MPL 2.0
 
-#### Screenshots
+### Screenshots
 ![homescreen](/assets/homescreen_0.1.1.png)
 ![taskcreation](/assets/taskcreation_0.1.1.png)
 ![taskcompletion](/assets/taskcompletion_0.1.1.png)
