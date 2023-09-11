@@ -11,7 +11,7 @@ jobs:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
       - name: Build docs
-        run: crystal docs --project-name webtrans
+        run: crystal docs --project-name webtrans /src/webui/src/**/*.cr
       - name: Deploy docs
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
