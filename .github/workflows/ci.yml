@@ -11,10 +11,11 @@ jobs:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
       - name: Build docs
-        run: crystal docs --project-name webtrans /src/webui/src/**/*.cr
+        working-directory: ./src/webui/
+        run: crystal docs --project-name webtrans
       - name: Deploy docs
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./src/webui/docs
