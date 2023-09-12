@@ -8,14 +8,14 @@
 #
 # The user is given an input textarea for entering his code and two drop
 # down menus for choosing the input and output language.
-# When pressing the "Go!" button the user is redirected via `Me::UpdateShow` to `MeUpdate::TaskCheckPage`.
-class Me::ShowPage < MainLayout
+# When pressing the "Go!" button the user is redirected via `Task::SaveForm` to `Task::CheckPage`.
+class Task::CreatePage < MainLayout
   needs operation : SaveTranscompileTask
   needs output : String = "Output"
 
   def content
 
-    form_for Me::UpdateShow, class: "inline-form h-100 w-auto" do
+    form_for Task::SaveForm, class: "inline-form h-100 w-auto" do
       div class: "container h-100 w-100" do 
         div class: "row h-100 w-100" do
           div class: "col" do

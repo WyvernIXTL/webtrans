@@ -4,13 +4,13 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-# Creates an instance of `SaveTranscompileTask` and renders a form `ShowPage`
+# Creates an instance of `SaveTranscompileTask` and renders a form `Task::CreatePage`
 # for saving transcompilation tasks.
-class Me::Show < BrowserAction
+class Task::ShowCreatePage < BrowserAction
   include Auth::AllowGuests
 
-  get "/me" do
+  get "/task" do
     op = SaveTranscompileTask.new
-    html ShowPage,  operation: op
+    html Task::CreatePage,  operation: op
   end
 end

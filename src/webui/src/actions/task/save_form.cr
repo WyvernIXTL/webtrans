@@ -4,18 +4,18 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-# Receives from `ShowPage` a `SaveTranscompileTask` which is saved if correct. The user is then redirected to `Me::TaskCheckPage`.
-class Me::UpdateShow < BrowserAction
+# Receives from `Task::CreatePage` a `SaveTranscompileTask` which is saved if correct. The user is then redirected to `Task::ShowCheckPage`.
+class Task::SaveForm < BrowserAction
   include Auth::AllowGuests
 
-  post "/me" do
+  post "/task" do
     SaveTranscompileTask.create(params, current_user) do |operation, transcompile_task|
       if transcompile_task
         flash.success = "Task saved"
-        redirect to: "/me/#{transcompile_task.id}"
+        redirect to: "/task/#{transcompile_task.id}"
       else
         flash.failure = operation.errors.to_s
-        html ShowPage, operation: operation, output: "Please try again."
+        html Task::CreatePage, operation: operation, output: "Please try again."
       end
     end
   end

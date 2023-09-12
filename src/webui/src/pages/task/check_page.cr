@@ -7,8 +7,8 @@
 # Selfrefreshing webpage for checking the status and result of the given `TranscompileTask`.
 #
 # The JS code for the refresh can be found in "src/js/me.js"
-# The refresh comes from the BrowserAction `Me::TaskCheckPage` (which should be calles Me::TaskCheckShow ...).
-class MeUpdate::TaskCheckPage < MainLayout
+# The refresh comes from the BrowserAction `Task::ShowCheckPage`.
+class Task::CheckPage < MainLayout
   needs input : String
   needs output : String
 

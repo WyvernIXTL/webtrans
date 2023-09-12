@@ -5,15 +5,15 @@
 
 
 # Checks the database for *task_id* of a `TranscompileTask` task and displays it on successfull copmletion.
-class Me::TaskCheckPage < BrowserAction
+class Task::ShowCheckPage < BrowserAction
     include Auth::AllowGuests
 
-    get "/me/:task_id" do
+    get "/task/:task_id" do
         begin
             task = TranscompileTaskQuery.find(task_id)
         rescue
             flash.failure = "No task with id #{task_id} found."
-            redirect to: Show
+            redirect to: Task::ShowCreatePage
         end
         if !task.nil?
             if !task.completed.nil? && !task.input_code.nil?
@@ -21,13 +21,13 @@ class Me::TaskCheckPage < BrowserAction
                     if !task.output_code.nil?
                         flash.success = "Task transcompiled!"
                         outp : String = task.output_code.to_s
-                        return html MeUpdate::TaskCheckPage, input: task.input_code, output: outp
+                        return html Task::CheckPage, input: task.input_code, output: outp
                     else
                         flash.failure = "Task was NOT completed successfully"
                     end
                 else
                     flash.success = "Waiting for result. This will take some time."
-                    return html MeUpdate::TaskCheckPage, input: task.input_code, output: "Still Waiting."
+                    return html Task::CheckPage, input: task.input_code, output: "Still Waiting."
                 end
             else
                 flash.failure = "Task corrupted."
@@ -35,6 +35,6 @@ class Me::TaskCheckPage < BrowserAction
         else
             flash.failure = "No task with id #{task_id} found."
         end
-        redirect to: Show
+        redirect to: Task::ShowCreatePage
     end
 end

@@ -12,7 +12,7 @@ class Home::IndexPage < AuthLayout
       div class: "col-lg-6 mx-auto" do
         para "Webservice for transcoding functions.", class: "lead mb-4"
         div class: "d-grid gap-2 d-sm-flex justify-content-sm-center" do
-          link "Proceed as Guest", to: Me::Show, class: "btn btn-outline-secondary btn-lg px-4"
+          link "Proceed as Guest", to: Task::ShowCreatePage, class: "btn btn-outline-secondary btn-lg px-4"
           link "Login", to: SignIns::New, class: "btn btn-primary btn-lg px-4 me-sm-3"
         end
       end
