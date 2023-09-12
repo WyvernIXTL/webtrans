@@ -5,7 +5,7 @@
 
 
 /**
- * Check if on page /me/:id and if the transcompilation task is not done, refreshes the page
+ * Check if on page /task/:id and if the transcompilation task is not done, refreshes the page
  */
 function checkTaskAndUpdate() {
     outp_area = document.getElementById("outp_text_area")

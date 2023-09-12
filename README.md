@@ -1,6 +1,8 @@
 # webtrans
 WebTrans 2023 project
 
+*WebTrans is a webservice for transcompiling between programming languages.*
+
 IN DEVELOPMENT! NOT FOR PRODUCTION!
 
 ## Usage
@@ -72,8 +74,9 @@ if not finished (200)
 
 
 ## Documentation
-Most documentation of crystal code is done for `crystal docs` to work with it.
-Auto generated webui documentation can be found on [https://wyvernixtl.github.io/webtrans/](https://wyvernixtl.github.io/webtrans/).
+For handcrafted development documentation head to [docs/DOCUMENTATION](./docs/DOCUMENTATION.md).
+
+Auto generated and always current webui documentation can be found on [https://wyvernixtl.github.io/webtrans/](https://wyvernixtl.github.io/webtrans/).
 
 
 ## MISC
