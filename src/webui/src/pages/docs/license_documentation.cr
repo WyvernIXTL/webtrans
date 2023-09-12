@@ -5,7 +5,7 @@
 
 
 # Static webpage displaying some information regarding the licensing of the project.
-class LicenseDocumentation::LicenseDocumentation < AuthLayout
+class Docs::LicenseDocumentation < AuthLayout
     def content
         div class: "container pl-4 mt-2" do
             h3 "License of the WebTrans Project"

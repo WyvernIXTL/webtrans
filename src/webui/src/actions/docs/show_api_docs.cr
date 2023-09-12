@@ -4,11 +4,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 
-# Renders page with small amount of licensing information.
-class LicenseDocumentationAction::Show < BrowserAction
-    include Auth::AllowGuests
-  
-    get "/license/" do
-      html LicenseDocumentation::LicenseDocumentation
-    end
+# Renders page with some limited api documentation.
+class Docs::ShowApiDocs < BrowserAction
+  include Auth::AllowGuests
+
+  get "/api/" do
+    html Docs::ApiDocumentation
   end
+end

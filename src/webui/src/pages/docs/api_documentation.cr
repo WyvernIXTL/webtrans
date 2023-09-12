@@ -5,7 +5,7 @@
 
 
 # Static webpage displaying api documentation, which can also be found on github.
-class ApiDocumentation::ApiDocumentation < AuthLayout
+class Docs::ApiDocumentation < AuthLayout
     def content
         div class: "container pl-4" do
             raw <<-HTML
