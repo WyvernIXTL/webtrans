@@ -1,3 +1,10 @@
+
+> [!WARNING]  
+> This is the source code repository of a student practical.
+> The project is not maintained and there are no future plans of maintaining it.
+> The project is not finished!
+> While this prototype worked and the docker files built at some point, there is no guarantee that they'll continue doing so.
+
 # webtrans
 WebTrans 2023 project
 
